@@ -21,9 +21,23 @@
 
 ### Csop. 2
 
-| Hatóanyag | Receptor? | Hatás mechanizmus | Indikáció | Mellékhatások |
-| --- | --- | --- | --- | --- |
-| Csop. 2 teszt anyag | | | | |
+<table>
+    <thead>
+        <tr>
+            <th>Hatóanyag</th>
+            <th>Hatás mechanizmus</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Csoport 2 teszt anyag</td>
+            <td rowspan=2>mindkettő anyagra jellemző hatásmechanizmus</td>
+        </tr>
+        <tr>
+            <td>csoport 2 teszt anyag 2</td>
+        </tr>
+    </tbody>
+</table>
 
 | [előző](link) | [tételsor](0.%20Hattan%20ea%20kidolgozás%20-%20Németh%20Boldizsár.md) | [következő](link) |
 
