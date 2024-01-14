@@ -26,15 +26,18 @@
         <tr>
             <th>Hatóanyag</th>
             <th>Hatás mechanizmus</th>
+            <th>Indikáció</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>Csoport 2 teszt anyag</td>
             <td rowspan=2>mindkettő anyagra jellemző hatásmechanizmus</td>
+            <td>indikáció 1</td>
         </tr>
         <tr>
             <td>csoport 2 teszt anyag 2</td>
+            <td>indikáció 2</td>
         </tr>
     </tbody>
 </table>
