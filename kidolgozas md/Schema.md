@@ -43,5 +43,3 @@
 </table>
 
 | [előző](link) | [tételsor](0.%20Hattan%20ea%20kidolgozás%20-%20Németh%20Boldizsár.md) | [következő](link) |
-
-[felülre](#a-tétel-címe)
