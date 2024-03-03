@@ -4,7 +4,7 @@
 
 ## Mi a github
 
-A github egy elsősorban programozók által használt verzió kezelő software. 
+A github egy elsősorban programozók által használt verzió kezelő software.
 
 Azért választottam ezt a platformot, mert így egyszerűen számon lehet tartani, hogy mikor és ki által készült egy-egy részlete a jegyzetnek.
 

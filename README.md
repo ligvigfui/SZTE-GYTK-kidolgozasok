@@ -1,5 +1,7 @@
 # Ez egy folyamatosan fejlődő kidolgozása a Gyógyszerész kar tantárgyaihoz
 
+[Nézd meg online](https://github.com/ligvigfui/SZTE-GYTK-kidolgozasok)
+
 ## Már elérhető anyagok
 
 ### 7. félév
