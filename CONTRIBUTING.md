@@ -9,10 +9,10 @@ A github egy elsősorban programozók által használt verzió kezelő software.
 ## Hogyan használjam a githubot
 
 1. Regisztrálj a [github](https://github.com/signup)-on
-2. Tölts le egy verzió kezelőt. Például:  [git](https://git-scm.com/), [github desktop](https://desktop.github.com/), [fork](https://git-fork.com/)
+2. Tölts le egy verzió kezelőt. Például: [fork](https://git-fork.com/), [github desktop](https://desktop.github.com/), [git](https://git-scm.com/)
 3. [Fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)-old le a [repository](https://github.com/ligvigfui/SZTE-GYTK-kidolgozasok)-t
 4. Készíts egy új [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)-et a munkádhoz és nevezz el a témának megfelelően
-5. Hajtsd végre a változtatásaidat
+5. Hajtsd végre a változtatásaidat, majd [commit](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/committing-and-reviewing-changes-to-your-project)-old és [push](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/pushing-changes-to-github)-old fel a őket
 6. Készíts egy [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)-et az eredeti repository-hoz
 7. Várj a visszajelzésre és ha minden rendben van, akkor a változtatásaid bekerülnek ide.
 
