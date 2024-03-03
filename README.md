@@ -1,6 +1,6 @@
 # Ez egy folyamatosan fejlődő kidolgozása a Gyógyszerész kar tantárgyaihoz
 
-[Nézd meg online](https://github.com/ligvigfui/SZTE-GYTK-kidolgozasok)
+Nézd meg online: [https://github.com/ligvigfui/SZTE-GYTK-kidolgozasok](https://github.com/ligvigfui/SZTE-GYTK-kidolgozasok)
 
 ## Már elérhető anyagok
 
