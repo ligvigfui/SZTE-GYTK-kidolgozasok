@@ -4,7 +4,9 @@
 
 ## Mi a github
 
-A github egy elsősorban programozók által használt verzió kezelő software. Azért választottam ezt a platformot, így egyszerűen számon lehet tartani, hogy mikor és ki által készült egy-egy részlete egy jegyzetnek.
+A github egy elsősorban programozók által használt verzió kezelő software. 
+
+Azért választottam ezt a platformot, mert így egyszerűen számon lehet tartani, hogy mikor és ki által készült egy-egy részlete a jegyzetnek.
 
 ## Hogyan használjam a githubot
 
@@ -21,6 +23,8 @@ Ha meg szeretnéd nézni, hogy kinek a művét olvasod, és hányadik évezredbe
 ## Mi a markdown
 
 A markdown egy könnyen olvasható és írható szöveg formátum. A githubon a `.md` kiterjesztésű fájlokban lehet használni. A markdown segítségével lehet például könnyen képeket beilleszteni, linkeket, listákat, táblázatokat készíteni.
+
+Azért ezt a formátumot választottam, mivel majdnem minden funkcióval rendelkezik, amivel a word, vagy a PDF, de kisebb a fájl mérete, és a változtatások github pull request-ekkel könnyen olvashatóak.
 
 ## Hogyan használjam a markdownot
 
