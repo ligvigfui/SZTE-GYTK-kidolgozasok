@@ -1,8 +1,10 @@
 # Hozzájárulási útmutató
 
+[vissza](README.md)
+
 ## Mi a github
 
-A github egy elsősorban programozók által használt verzió kezelő software. Azért választottam ezt a platformot, így egyszerűen számon lehet tartani, hogy mikor és ki által készült egy egy részlete egy jegyzetnek.
+A github egy elsősorban programozók által használt verzió kezelő software. Azért választottam ezt a platformot, így egyszerűen számon lehet tartani, hogy mikor és ki által készült egy-egy részlete egy jegyzetnek.
 
 ## Hogyan használjam a githubot
 
@@ -13,6 +15,8 @@ A github egy elsősorban programozók által használt verzió kezelő software.
 5. Hajtsd végre a változtatásaidat
 6. Készíts egy [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)-et az eredeti repository-hoz
 7. Várj a visszajelzésre és ha minden rendben van, akkor a változtatásaid bekerülnek ide.
+
+Ha meg szeretnéd nézni, hogy kinek a művét olvasod, és hányadik évezredben készült, ezt a [blame](https://docs.github.com/en/repositories/working-with-files/using-files/viewing-a-file#viewing-the-line-by-line-revision-history-for-a-file) funkcióval tudod megtenni.
 
 ## Mi a markdown
 
@@ -25,3 +29,5 @@ A markdown használata nagyon egyszerű. A [github](https://guides.github.com/fe
 ## Szövegszerkesztő
 
 A markdown fájlok szerkesztésére bármilyen szövegszerkesztőt használhatsz, akár online is meg lehet oldani. Hosszabb feladatokhoz azonban érdemes megfontolni a [visual studio code](https://code.visualstudio.com/)-ot, a [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) kiegészítővel. Ez a kiegészítő segít abban, hogy a markdown fájlod hibátlan legyen.
+
+[vissza](README.md)

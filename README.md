@@ -1,4 +1,4 @@
-# Ez egy folyamatosan fejlődő kidolgozása a Gyógyszerész kar tantárgyaianak
+# Ez egy folyamatosan fejlődő kidolgozása a Gyógyszerész kar tantárgyaihoz
 
 ## Már elérhető anyagok
 
