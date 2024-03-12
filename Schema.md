@@ -42,4 +42,8 @@ Ez egy <br> sortörés | **félkövér** | _dőlt_
     </tbody>
 </table>
 
+[színes szöveg:](https://github.com/orgs/community/discussions/31570#:~:text=Author-,Find%20a%20way%20to%20colorfy%20text%20in%20Github%20in%20the%20best%20way%20now%20(Since%20May%202022)!,-If%20i%20use)
+
+$${\color{red}piros}$$
+
 [előző](link) | [tételsor](0.%20Tételsor.md) | [következő](link)
