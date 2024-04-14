@@ -92,7 +92,7 @@ impl<T> DataStorage<T> {
             random -= self.data[layer].len() * FIBONACCI[layer] as usize;
             layer += 1;
         }
-        random = random % FIBONACCI[layer] as usize;
+        random = random / FIBONACCI[layer] as usize;
         self.add_to_recents(self.data[layer][random].clone());
         (layer, random, &self.data[layer][random])
     }
