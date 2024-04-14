@@ -8,10 +8,11 @@ use crate::*;
 pub struct DataStorage<T> {
     data: Vec<Vec<T>>,
     recently_used: VecDeque<T>,
+    recents_size: usize,
     weight_sum: usize,
 }
 
-impl<T> DataStorage<T> {
+impl<T: std::cmp::PartialEq> DataStorage<T> {
     pub fn new(settings: Option<DataStorageSettings<T>>) -> Self {
         match settings {
             Some(settings) => {
@@ -22,12 +23,14 @@ impl<T> DataStorage<T> {
                 DataStorage {
                     data,
                     recently_used: VecDeque::with_capacity(settings.recent_capacity),
+                    recents_size: settings.recent_capacity,
                     weight_sum: 0,
                 }
             }
             None => DataStorage {
                 data: Vec::new(),
-                recently_used: VecDeque::with_capacity(10),
+                recently_used: VecDeque::with_capacity(3),
+                recents_size: 3,
                 weight_sum: 0,
             }
         }
@@ -93,12 +96,15 @@ impl<T> DataStorage<T> {
             layer += 1;
         }
         random = random / FIBONACCI[layer] as usize;
+        if self.recently_used.contains(&self.data[layer][random]) && self.get_remaining_items() > self.recents_size*2 {
+            return self.get_random();
+        }
         self.add_to_recents(self.data[layer][random].clone());
         (layer, random, &self.data[layer][random])
     }
 
     fn add_to_recents(&mut self, item: T) {
-        if self.recently_used.len() == self.recently_used.capacity() {
+        while self.recently_used.len() >= self.recents_size {
             self.recently_used.pop_back();
         }
         self.recently_used.push_front(item);
@@ -114,5 +120,9 @@ impl<T> DataStorage<T> {
 
     pub fn get_remaining_weight(&self) -> usize {
         self.weight_sum
+    }
+
+    pub fn set_recently_used_len(&mut self, size: usize) {
+        self.recents_size = size
     }
 }
