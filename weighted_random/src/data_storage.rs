@@ -75,6 +75,9 @@ impl<T> DataStorage<T> where T: PartialEq + Clone {
     }
 
     pub fn move_down(&mut self, current_layer: usize, index: usize) {
+        if current_layer == 0 {
+            return;
+        }
         let value = self.data[current_layer].remove(index);
         self.insert(current_layer - 1, value);
         self.update_weight_sum();

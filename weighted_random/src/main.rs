@@ -16,16 +16,16 @@ fn main() {
         Err(_) => DataStorage::new(None),
     };
     let mut current_streak = 0;
-    let mut points_achieved = 0;
-    let mut questions_answered = 0;
+    let mut points = 0;
+    let mut answered = 0;
 
     let mut stdout = stdout();
     enable_raw_mode().unwrap();
     let mut exiting = false;
     while !exiting {
         execute!(stdout, Clear(ClearType::All)).unwrap();
-        println!("Points achieved: {}, Questions answered: {}, remaining items: {}, reamining weight: {}\r\n",
-            points_achieved, questions_answered, data.get_remaining_items(), data.get_remaining_weight());
+        println!("Points: {}, Answered: {}, remaining: {}, remaining weight: {}\r\n",
+            points, answered, data.get_remaining_items(), data.get_remaining_weight());
         println!("Press ctrl + 's' to save and exit, ctrl + 'a' to add new items, ctrl + 'r' to reset unused items or space to get a random item\r\n");
         
         let event = read().unwrap();
@@ -60,21 +60,21 @@ fn main() {
             Event::Key(KeyEvent {
                 code: KeyCode::Char(' '), .. }) => { loop {
                     execute!(stdout, Clear(ClearType::All)).unwrap();
-                    println!("Points achieved: {}, Questions answered: {}, remaining items: {}, reamining weight: {}\r\n",
-                        points_achieved, questions_answered, data.get_remaining_items(), data.get_remaining_weight());
+                    println!("Points: {}, Answered: {}, remaining: {}, remaining weight: {}\r\n",
+                        points, answered, data.get_remaining_items(), data.get_remaining_weight());
                     let (layer, index, item) = data.get_random();
                     println!("Tell me everything you know about {}\r\n", item);
                     println!("Press ' ' or enter if you know something about it or 'w' if you don't\r\n");
                     println!("Press 'q' or escape to go to the menu or ctrl + 's' to save and exit\r\n");
                     std::thread::sleep(Duration::from_millis(100));
-                    questions_answered += 1;
+                    answered += 1;
                     let inner_event = read().unwrap();
                     match inner_event {
                         Event::Key(KeyEvent {code: KeyCode::Char(' '), .. }) |
                         Event::Key(KeyEvent {code: KeyCode::Enter, .. }) => {
                             data.move_down(layer, index);
                             current_streak += 1;
-                            points_achieved += fibonacci(current_streak+1);
+                            points += fibonacci(current_streak+1);
                         },
                         Event::Key(KeyEvent {code: KeyCode::Char('w'), .. }) => {
                             data.move_up(layer, index);
@@ -82,7 +82,7 @@ fn main() {
                         },
                         Event::Key(KeyEvent {code: KeyCode::Char('q'), .. }) |
                         Event::Key(KeyEvent {code: KeyCode::Esc, .. }) => {
-                            questions_answered -= 1;
+                            answered -= 1;
                             break;
                         },
                         Event::Key(KeyEvent {
@@ -92,6 +92,9 @@ fn main() {
                                 exiting = true;
                                 break;
                         },
+                        Event::Key(KeyEvent {
+                            code: KeyCode::Char('r'),
+                            modifiers: KeyModifiers::CONTROL, .. }) => points = 0,
                         _ => current_streak = 0,
                     }}
                 },
