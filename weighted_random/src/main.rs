@@ -1,4 +1,4 @@
-use std::{fs, io::stdout};
+use std::{fs, io::stdout, time::Duration};
 use crossterm::{
     event::{read, Event, KeyCode, KeyEvent, KeyModifiers},
     terminal::{disable_raw_mode, enable_raw_mode, Clear, ClearType},
@@ -66,6 +66,7 @@ fn main() {
                     println!("Tell me everything you know about {}\r\n", item);
                     println!("Press ' ' or enter if you know something about it or 'w' if you don't\r\n");
                     println!("Press 'q' or escape to go to the menu or ctrl + 's' to save and exit\r\n");
+                    std::thread::sleep(Duration::from_millis(100));
                     questions_answered += 1;
                     let inner_event = read().unwrap();
                     match inner_event {
@@ -91,7 +92,7 @@ fn main() {
                                 exiting = true;
                                 break;
                         },
-                        _ => {},
+                        _ => current_streak = 0,
                     }}
                 },
             Event::Key(KeyEvent {

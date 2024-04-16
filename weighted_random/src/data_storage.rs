@@ -2,6 +2,7 @@ use std::{collections::VecDeque, mem};
 
 use rand::Rng;
 use serde::{Serialize, Deserialize};
+
 use crate::*;
 
 #[derive(Serialize, Deserialize)]
@@ -12,7 +13,7 @@ pub struct DataStorage<T> {
     weight_sum: usize,
 }
 
-impl<T: std::cmp::PartialEq> DataStorage<T> {
+impl<T> DataStorage<T> where T: PartialEq + Clone {
     pub fn new(settings: Option<DataStorageSettings<T>>) -> Self {
         match settings {
             Some(settings) => {
@@ -85,29 +86,30 @@ impl<T: std::cmp::PartialEq> DataStorage<T> {
         self.update_weight_sum();
     }
 
-    pub fn get_random(&mut self) -> (usize, usize, &T)
-    where
-        T: Clone,
-    {
-        let mut random = rand::thread_rng().gen_range(0..self.weight_sum);
+    pub fn get_random(&mut self) -> (usize, usize, &T) {
+        let mut random = rand::thread_rng().gen_range(0..self.weight_sum + 1);
+        if random == self.weight_sum {
+            random = rand::thread_rng().gen_range(0..self.data[0].len());
+            return self.check_recents(0, random)
+        }
         let mut layer = 0;
         while random >= self.data[layer].len() * FIBONACCI[layer] as usize {
             random -= self.data[layer].len() * FIBONACCI[layer] as usize;
             layer += 1;
         }
         random = random / FIBONACCI[layer] as usize;
+        self.check_recents(layer, random)
+    }
+
+    fn check_recents(&mut self, layer: usize, random: usize) -> (usize, usize, &T) {
         if self.recently_used.contains(&self.data[layer][random]) && self.get_remaining_items() > self.recents_size*2 {
             return self.get_random();
         }
-        self.add_to_recents(self.data[layer][random].clone());
-        (layer, random, &self.data[layer][random])
-    }
-
-    fn add_to_recents(&mut self, item: T) {
         while self.recently_used.len() >= self.recents_size {
             self.recently_used.pop_back();
         }
-        self.recently_used.push_front(item);
+        self.recently_used.push_front(self.data[layer][random].clone());
+        (layer, random, &self.data[layer][random])
     }
 
     pub fn get_remaining_items(&self) -> usize {
