@@ -156,7 +156,11 @@ fn main() {
                         },
                         Event::Key(KeyEvent {
                             code: KeyCode::Char('r'),
-                            modifiers: KeyModifiers::CONTROL, .. }) => points = 0,
+                            modifiers: KeyModifiers::CONTROL, .. }) => {
+                                points = 0;
+                                current_streak = 0;
+                                answered = 0;
+                            },
                         _ => current_streak = 0,
                     }}
                 },

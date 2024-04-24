@@ -91,9 +91,12 @@ impl<T> DataStorage<T> where T: PartialEq + Clone + std::fmt::Debug {
 
     pub fn get_random(&mut self) -> (usize, usize, &T) {
         let mut random = rand::thread_rng().gen_range(0..self.weight_sum + 1);
-        if random == self.weight_sum && self.data[0].len() != 0 {
-            random = rand::thread_rng().gen_range(0..self.data[0].len());
-            return self.check_recents(0, random)
+        if random == self.weight_sum {
+            if  self.data[0].len() != 0 {
+                random = rand::thread_rng().gen_range(0..self.data[0].len());
+                return self.check_recents(0, random)
+            }
+            return self.get_random();
         }
         let mut layer = 0;
         while random >= self.data[layer].len() * FIBONACCI[layer] as usize {
