@@ -5,7 +5,7 @@ use serde::{Serialize, Deserialize};
 
 use crate::*;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct DataStorage<T> {
     data: Vec<Vec<T>>,
     recently_used: VecDeque<T>,
@@ -13,7 +13,7 @@ pub struct DataStorage<T> {
     weight_sum: usize,
 }
 
-impl<T> DataStorage<T> where T: PartialEq + Clone {
+impl<T> DataStorage<T> where T: PartialEq + Clone + std::fmt::Debug {
     pub fn new(settings: Option<DataStorageSettings<T>>) -> Self {
         match settings {
             Some(settings) => {
@@ -91,7 +91,7 @@ impl<T> DataStorage<T> where T: PartialEq + Clone {
 
     pub fn get_random(&mut self) -> (usize, usize, &T) {
         let mut random = rand::thread_rng().gen_range(0..self.weight_sum + 1);
-        if random == self.weight_sum {
+        if random == self.weight_sum && self.data[0].len() != 0 {
             random = rand::thread_rng().gen_range(0..self.data[0].len());
             return self.check_recents(0, random)
         }
@@ -104,15 +104,15 @@ impl<T> DataStorage<T> where T: PartialEq + Clone {
         self.check_recents(layer, random)
     }
 
-    fn check_recents(&mut self, layer: usize, random: usize) -> (usize, usize, &T) {
-        if self.recently_used.contains(&self.data[layer][random]) && self.get_remaining_items() > self.recents_size*2 {
+    fn check_recents(&mut self, layer: usize, index: usize) -> (usize, usize, &T) {
+        if self.recently_used.contains(&self.data[layer][index]) && self.get_remaining_items() > self.recents_size*2 {
             return self.get_random();
         }
         while self.recently_used.len() >= self.recents_size {
             self.recently_used.pop_back();
         }
-        self.recently_used.push_front(self.data[layer][random].clone());
-        (layer, random, &self.data[layer][random])
+        self.recently_used.push_front(self.data[layer][index].clone());
+        (layer, index, &self.data[layer][index])
     }
 
     pub fn get_remaining_items(&self) -> usize {
@@ -129,5 +129,16 @@ impl<T> DataStorage<T> where T: PartialEq + Clone {
 
     pub fn set_recently_used_len(&mut self, size: usize) {
         self.recents_size = size
+    }
+}
+
+impl Default for DataStorage<String> {
+    fn default() -> Self {
+        Self {
+            data: Default::default(),
+            recently_used: Default::default(),
+            recents_size: Default::default(),
+            weight_sum: Default::default()
+        }
     }
 }
