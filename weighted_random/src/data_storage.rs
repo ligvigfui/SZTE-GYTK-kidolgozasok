@@ -37,7 +37,7 @@ impl<T> DataStorage<T> where T: PartialEq + Clone + std::fmt::Debug {
         }
     }
 
-    fn update_weight_sum(&mut self) {
+    pub fn update_weight_sum(&mut self) {
         self.weight_sum = 0;
         for i in 0..self.data.len() {
             self.weight_sum += self.data[i].len() * FIBONACCI[i] as usize;

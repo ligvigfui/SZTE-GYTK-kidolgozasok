@@ -1,5 +1,5 @@
 use std::{
-    fs, io::{stdin, stdout}, mem, time::{Duration, SystemTime}
+    fs, io::{stdin, stdout}, time::{Duration, SystemTime}
 };
 use crossterm::{
     event::{read, Event, KeyCode, KeyEvent, KeyModifiers},
@@ -34,7 +34,7 @@ fn load_file () -> File {
     stdin().read_line(&mut input).unwrap();
     let index = input.trim().parse::<usize>().unwrap_or_default();
     let mut file_name = Option::None;
-    let data;
+    let mut data;
     let mut message = "".to_string();
     if index == 0 {
         data = DataStorage::new(None);
@@ -66,16 +66,16 @@ fn load_file () -> File {
             },
         };
     }
+    data.update_weight_sum();
     File {
         file_name: file_name.unwrap(),
-        message: message,
+        message,
         data
     }
 }
 
 fn main() {
     let mut file = load_file();
-    let mut data: DataStorage<String> = mem::take(&mut file.data);
     let mut current_streak = 0;
     let mut points = 0;
     let mut answered = 0;
@@ -87,7 +87,7 @@ fn main() {
     println!("{}\r", file.message);
     while !exiting {
         println!("Points: {}, Answered: {}, remaining: {}, remaining weight: {}\r",
-            points, answered, data.get_remaining_items(), data.get_remaining_weight());
+            points, answered, &file.data.get_remaining_items(), &file.data.get_remaining_weight());
         println!("Press ctrl + 's' to save and exit, ctrl + 'a' to add new items, ctrl + 'r' to reset unused items or space to get a random item\r");
         
         let event = read().unwrap();
@@ -106,7 +106,8 @@ fn main() {
                         }
                         items.push(input.trim().to_string());
                     }
-                    data.insert_range(2, items);
+                    file.data.insert_range(1, items);
+                    save(&file);
                     enable_raw_mode().unwrap();
                 },
             Event::Key(KeyEvent {
@@ -116,15 +117,22 @@ fn main() {
                     let mut input = String::new();
                     std::io::stdin().read_line(&mut input).unwrap();
                     if input.trim() == "reset" {
-                        data.reset_unused_items();
+                        file.data.reset_unused_items();
                     }
+                    save(&file);
                 },
             Event::Key(KeyEvent {
-                code: KeyCode::Char(' '), .. }) => { loop {
+                code: KeyCode::Char(' '), .. }) => { 
+                    if file.data.get_remaining_items() == 0 {
+                        println!("No more items to show\r");
+                        read().unwrap();
+                        continue;
+                    }
+                    loop {
                     execute!(stdout, Clear(ClearType::All)).unwrap();
                     println!("Points: {}, Answered: {}, remaining: {}, remaining weight: {}\r",
-                        points, answered, data.get_remaining_items(), data.get_remaining_weight());
-                    let (layer, index, item) = data.get_random();
+                        points, answered, &file.data.get_remaining_items(), &file.data.get_remaining_weight());
+                    let (layer, index, item) = file.data.get_random();
                     println!("Tell me everything you know about {}\r", item);
                     println!("Press ' ' or enter if you know something about it or 'w' if you don't\r");
                     println!("Press 'q' or escape to go to the menu or ctrl + 's' to save and exit\r");
@@ -134,12 +142,12 @@ fn main() {
                     match inner_event {
                         Event::Key(KeyEvent {code: KeyCode::Char(' '), .. }) |
                         Event::Key(KeyEvent {code: KeyCode::Enter, .. }) => {
-                            data.move_down(layer, index);
+                            file.data.move_down(layer, index);
                             current_streak += 1;
                             points += fibonacci(current_streak+1);
                         },
                         Event::Key(KeyEvent {code: KeyCode::Char('w'), .. }) => {
-                            data.move_up(layer, index);
+                            file.data.move_up(layer, index);
                             current_streak = 0;
                         },
                         Event::Key(KeyEvent {code: KeyCode::Char('q'), .. }) |
@@ -175,7 +183,11 @@ fn main() {
         execute!(stdout, Clear(ClearType::All)).unwrap();
     }
     disable_raw_mode().unwrap();
-    let file_data = serde_json::to_string(&data).unwrap();
+    save(&file);
+}
+
+fn save(file: &File) {
+    let file_data = serde_json::to_string(&file.data).unwrap();
     fs::write(format!("./datasets/{}", file.file_name), file_data).unwrap();
     println!("Saved {} file\r", file.file_name);
 }
