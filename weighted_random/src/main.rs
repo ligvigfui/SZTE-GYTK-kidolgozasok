@@ -144,7 +144,7 @@ fn main() {
                         Event::Key(KeyEvent {code: KeyCode::Enter, .. }) => {
                             file.data.move_down(layer, index);
                             current_streak += 1;
-                            points += fibonacci(current_streak+1);
+                            points += fibonacci(current_streak+1) as usize;
                         },
                         Event::Key(KeyEvent {code: KeyCode::Char('w'), .. }) => {
                             file.data.move_up(layer, index);
