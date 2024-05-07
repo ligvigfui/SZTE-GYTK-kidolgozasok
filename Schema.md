@@ -59,4 +59,49 @@ Ez egy <br> sortörés | **félkövér** | _dőlt_
 
 $${\color{red}piros}$$
 
+### Ez egy gráf
+
+[bővebben](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
+
+[még több grafikon](https://mermaid.js.org/syntax/stateDiagram.html)
+
+```mermaid
+stateDiagram
+  [*] --> Still
+  Still --> [*]
+
+  Still --> Moving
+  Moving --> Still
+  Moving --> Crash
+  Crash --> [*]
+```
+
+<details>
+
+<summary>Ez egy lenyitható fül</summary>
+
+[bővebben](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections)
+
+### You can add a header
+
+You can add text within a collapsed section.
+
+You can add an image or a code block, too.
+
+```ruby
+   puts "Hello World"
+```
+
+</details>
+
+### Ez egy matematikai képlet
+
+[bővebben](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)
+
+The Cauchy-Schwarz Inequality
+
+```math
+\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+```
+
 [előző](link) | [tételsor](0.%20Tételsor.md) | [következő](link)
