@@ -67,7 +67,6 @@ $${\color{red}piros}$$
 
 ```mermaid
 stateDiagram
-  A[<a href='https://google.com'>Crash</a>]
   [*] --> Still
   Still --> [*]
 
@@ -75,6 +74,11 @@ stateDiagram
   Moving --> Still
   Moving --> Crash
   Crash --> [*]
+```
+
+```mermaid
+flowchart TB
+  A[<a href='https://google.com'>works</a>]
 ```
 
 <details>
