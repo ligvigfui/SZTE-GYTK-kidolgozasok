@@ -67,13 +67,14 @@ $${\color{red}piros}$$
 
 ```mermaid
 stateDiagram
+  A[<a href='https://google.com'>Crash</a>]
   [*] --> Still
   Still --> [*]
 
   Still --> Moving
   Moving --> Still
   Moving --> Crash
-  Crash[<a href='https://google.com' target='_blank'>Crash</a>] --> [*]
+  Crash --> [*]
 ```
 
 <details>
