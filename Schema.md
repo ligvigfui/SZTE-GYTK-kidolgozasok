@@ -73,7 +73,7 @@ stateDiagram
   Still --> Moving
   Moving --> Still
   Moving --> Crash
-  Crash --> [*]
+  Crash[<a href='https://google.com' target='_blank'>Crash</a>] --> [*]
 ```
 
 <details>
